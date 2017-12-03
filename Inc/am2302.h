@@ -7,11 +7,11 @@
 
 #ifndef AM2302_H_
 #define AM2302_H_
-
+#include "stdint.h"
 void am2302_Init();
 int am2302_ReadData();
-float am2302_getTemperature();
-float am2302_getHumidity();
+int16_t am2302_getTemperature();
+uint16_t am2302_getHumidity();
 void am2302_pinOut();
 void am2302_inInput();
 

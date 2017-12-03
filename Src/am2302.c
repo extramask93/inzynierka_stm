@@ -34,8 +34,8 @@ void am2302_pinInput() {
 }
 void am2302_Init() {
 	am2302_pinOut();
-	  htim3.Init.Period = -1;
-	  HAL_TIM_Base_Init(&htim3);
+	htim3.Init.Period = -1;
+	HAL_TIM_Base_Init(&htim3);
 	HAL_TIM_Base_Start(&htim3);
 }
 int am2302_ReadData() {
@@ -67,23 +67,23 @@ int am2302_ReadData() {
 	}
 	return 0;
 }
-float am2302_getTemperature() {
-	  int retVal=0;
+int16_t am2302_getTemperature() {
+	  uint16_t retVal=0;
 	  float temperature=0;
 	  retVal = am2302Data[2];
 	  retVal <<= 8;
 	  retVal |= (am2302Data[3]) & 0xFF;
 	  temperature = retVal;
 	  temperature /= 10;
-	  return temperature;
+	  return retVal;
 }
-float am2302_getHumidity() {
-	  unsigned int retVal=0;
+uint16_t am2302_getHumidity() {
+	  uint16_t retVal=0;
 	  float humidity=0;
 	  retVal = am2302Data[0] & 0xFF;
 	  retVal <<= 8;
 	  retVal |= (am2302Data[1]) & 0xFF;
 	  humidity = retVal;
 	  humidity /= 10;
-	  return humidity;
+	  return retVal;
 }

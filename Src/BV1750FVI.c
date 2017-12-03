@@ -25,7 +25,7 @@ static void Init() {
 	  HAL_I2C_Init(&hi2c1);
 }
 
-int GetCurrentReading(unsigned int *value) {
+int GetCurrentReading(uint16_t *value) {
 	Init();
 	uint8_t buffer[2], dataON, dataOTH,dataOFF,addr;
 	volatile int result = 0;

@@ -36,10 +36,15 @@
 #include "stm32f1xx_it.h"
 
 /* USER CODE BEGIN 0 */
-
+#include "port.h"
+#include "stm32f1xx_hal_uart.h"
+#include "mb.h"
+#include "mbport.h"
+extern uint16_t downcounter;
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
+extern TIM_HandleTypeDef htim4;
 extern UART_HandleTypeDef huart1;
 
 /******************************************************************************/
@@ -185,12 +190,46 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
+* @brief This function handles TIM4 global interrupt.
+*/
+void TIM4_IRQHandler(void)
+{
+  /* USER CODE BEGIN TIM4_IRQn 0 */
+	 /* USER CODE BEGIN TIM7_IRQn 0 */
+	/*if(__HAL_TIM_GET_FLAG(&htim4, TIM_FLAG_UPDATE) != RESET && __HAL_TIM_GET_IT_SOURCE(&htim4, TIM_IT_UPDATE) !=RESET) {
+		HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_8);
+		__HAL_TIM_CLEAR_IT(&htim4, TIM_IT_UPDATE);
+	}*/
+	if(__HAL_TIM_GET_FLAG(&htim4, TIM_FLAG_UPDATE) != RESET && __HAL_TIM_GET_IT_SOURCE(&htim4, TIM_IT_UPDATE) !=RESET) {
+		//HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_8);
+		 __HAL_TIM_CLEAR_IT(&htim4, TIM_IT_UPDATE);
+		 if (!--downcounter)
+			 pxMBPortCBTimerExpired();
+	 }
+  /* USER CODE END TIM4_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim4);
+  /* USER CODE BEGIN TIM4_IRQn 1 */
+
+  /* USER CODE END TIM4_IRQn 1 */
+}
+
+/**
 * @brief This function handles USART1 global interrupt.
 */
 void USART1_IRQHandler(void)
 {
   /* USER CODE BEGIN USART1_IRQn 0 */
-
+	//if (FALSE != UART_IRQ_Handler(USART1))
+			//return;
+	uint32_t tmp_flag = __HAL_UART_GET_FLAG(&huart1, UART_FLAG_RXNE);
+	uint32_t tmp_it_source = __HAL_UART_GET_IT_SOURCE(&huart1, UART_IT_RXNE);
+	if((tmp_flag != RESET) && (tmp_it_source != RESET)) {
+		pxMBFrameCBByteReceived();
+		__HAL_UART_CLEAR_PEFLAG(&huart1);
+		return; }
+	if((__HAL_UART_GET_FLAG(&huart1, UART_FLAG_TXE) != RESET) &&(__HAL_UART_GET_IT_SOURCE(&huart1, UART_IT_TXE) != RESET)) {
+		pxMBFrameCBTransmitterEmpty();
+		return ; }
   /* USER CODE END USART1_IRQn 0 */
   HAL_UART_IRQHandler(&huart1);
   /* USER CODE BEGIN USART1_IRQn 1 */

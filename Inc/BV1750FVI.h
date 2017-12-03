@@ -7,7 +7,7 @@
 
 #ifndef BV1750FVI_H_
 #define BV1750FVI_H_
-
-int GetCurrentReading(int *value);
+#include "stdint.h"
+int GetCurrentReading(uint16_t *value);
 
 #endif /* BV1750FVI_H_ */
