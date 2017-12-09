@@ -41,9 +41,13 @@
 #include "mb.h"
 #include "mbport.h"
 extern uint16_t downcounter;
+extern uint16_t timcnt;
+extern volatile int timeOutFlag;
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
+extern RTC_HandleTypeDef hrtc;
+extern TIM_HandleTypeDef htim3;
 extern TIM_HandleTypeDef htim4;
 extern UART_HandleTypeDef huart1;
 
@@ -188,6 +192,39 @@ void SysTick_Handler(void)
 /* For the available peripheral interrupt handler names,                      */
 /* please refer to the startup file (startup_stm32f1xx.s).                    */
 /******************************************************************************/
+
+/**
+* @brief This function handles RTC global interrupt.
+*/
+void RTC_IRQHandler(void)
+{
+  /* USER CODE BEGIN RTC_IRQn 0 */
+	timcnt++;
+  /* USER CODE END RTC_IRQn 0 */
+  HAL_RTCEx_RTCIRQHandler(&hrtc);
+  /* USER CODE BEGIN RTC_IRQn 1 */
+
+  /* USER CODE END RTC_IRQn 1 */
+}
+
+/**
+* @brief This function handles TIM3 global interrupt.
+*/
+void TIM3_IRQHandler(void)
+{
+  /* USER CODE BEGIN TIM3_IRQn 0 */
+	if(__HAL_TIM_GET_FLAG(&htim3, TIM_FLAG_UPDATE) != RESET && __HAL_TIM_GET_IT_SOURCE(&htim3, TIM_IT_UPDATE) !=RESET) {
+		 __HAL_TIM_CLEAR_IT(&htim3, TIM_IT_UPDATE);
+		 if((TIM3 -> CR1 & TIM_CR1_CEN) == 0)
+			 return;
+		 timeOutFlag=1;
+	}
+  /* USER CODE END TIM3_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim3);
+  /* USER CODE BEGIN TIM3_IRQn 1 */
+
+  /* USER CODE END TIM3_IRQn 1 */
+}
 
 /**
 * @brief This function handles TIM4 global interrupt.

@@ -40,6 +40,8 @@
 #include "stm32f1xx_hal.h"
 #include "adc.h"
 #include "i2c.h"
+#include "rtc.h"
+#include "spi.h"
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
@@ -49,6 +51,7 @@
 #include "BV1750FVI.h"
 #include "SoilMoisture.h"
 #include "mbtask.h"
+#include "lcd.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -75,7 +78,6 @@ void TM_DelayMicros(uint32_t micros) {
     /* 4 cycles for one loop */
     while (micros--);
 }
-
 /* USER CODE END 0 */
 
 int main(void)
@@ -91,7 +93,6 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -106,6 +107,8 @@ int main(void)
   MX_I2C1_Init();
   MX_TIM3_Init();
   MX_ADC1_Init();
+  MX_RTC_Init();
+  MX_SPI1_Init();
 
   /* USER CODE BEGIN 2 */
   uint32_t frequency = HAL_RCC_GetHCLKFreq();
@@ -113,16 +116,18 @@ int main(void)
   MX_TIM4_Init();
   MX_USART1_UART_Init();
   am2302_Init();
-  //SoilInit();
+  LCD_init();
+  LCD_print("Hello world!",0,0);
   /* USER CODE END 2 */
+
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
   /* USER CODE END WHILE */
-
+	  //LCD_refreshScr();
   /* USER CODE BEGIN 3 */
-	  ModbusRTUTask("asd");
+	  //ModbusRTUTask("asd");
 
   }
   /* USER CODE END 3 */
@@ -140,10 +145,11 @@ void SystemClock_Config(void)
 
     /**Initializes the CPU, AHB and APB busses clocks 
     */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_LSI|RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
   RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+  RCC_OscInitStruct.LSIState = RCC_LSI_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
   RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
@@ -166,7 +172,8 @@ void SystemClock_Config(void)
     _Error_Handler(__FILE__, __LINE__);
   }
 
-  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADC;
+  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_RTC|RCC_PERIPHCLK_ADC;
+  PeriphClkInit.RTCClockSelection = RCC_RTCCLKSOURCE_LSI;
   PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV6;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
   {

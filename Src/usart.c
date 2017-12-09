@@ -43,7 +43,14 @@
 #include "gpio.h"
 
 /* USER CODE BEGIN 0 */
-
+void InitIterruptOnUSART() {
+	  __HAL_RCC_GPIOA_CLK_ENABLE();
+	  GPIO_InitTypeDef GPIO_InitStruct;
+	  GPIO_InitStruct.Pin = GPIO_PIN_10;
+	  GPIO_InitStruct.Mode = GPIO_MODE_EVT_RISING;
+	  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+	  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+}
 /* USER CODE END 0 */
 
 UART_HandleTypeDef huart1;

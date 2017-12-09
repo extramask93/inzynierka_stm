@@ -8,6 +8,8 @@
 #ifndef BV1750FVI_H_
 #define BV1750FVI_H_
 #include "stdint.h"
-int GetCurrentReading(uint16_t *value);
+int BV_ReadData(uint16_t *value);
+void BV_Init();
+void BV_DeInit();
 
 #endif /* BV1750FVI_H_ */

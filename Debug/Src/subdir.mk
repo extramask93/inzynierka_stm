@@ -11,8 +11,11 @@ C_SRCS += \
 ../Src/delays.c \
 ../Src/gpio.c \
 ../Src/i2c.c \
+../Src/lcd.c \
 ../Src/main.c \
 ../Src/mbtask.c \
+../Src/rtc.c \
+../Src/spi.c \
 ../Src/stm32f1xx_hal_msp.c \
 ../Src/stm32f1xx_it.c \
 ../Src/system_stm32f1xx.c \
@@ -27,8 +30,11 @@ OBJS += \
 ./Src/delays.o \
 ./Src/gpio.o \
 ./Src/i2c.o \
+./Src/lcd.o \
 ./Src/main.o \
 ./Src/mbtask.o \
+./Src/rtc.o \
+./Src/spi.o \
 ./Src/stm32f1xx_hal_msp.o \
 ./Src/stm32f1xx_it.o \
 ./Src/system_stm32f1xx.o \
@@ -43,8 +49,11 @@ C_DEPS += \
 ./Src/delays.d \
 ./Src/gpio.d \
 ./Src/i2c.d \
+./Src/lcd.d \
 ./Src/main.d \
 ./Src/mbtask.d \
+./Src/rtc.d \
+./Src/spi.d \
 ./Src/stm32f1xx_hal_msp.d \
 ./Src/stm32f1xx_it.d \
 ./Src/system_stm32f1xx.d \

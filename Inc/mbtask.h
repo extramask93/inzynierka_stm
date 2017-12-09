@@ -9,5 +9,5 @@
 #define MBTASK_H_
 
 void ModbusRTUTask(void const * argument);
-
+void GoToStop();
 #endif /* MBTASK_H_ */

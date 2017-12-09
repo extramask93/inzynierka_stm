@@ -35,12 +35,33 @@ extern TIM_HandleTypeDef htim4;
 BOOL
 xMBPortTimersInit( USHORT usTim1Timerout50us )
 {
-	/*htim.Instance = TIM4;
-	htim.Init.CounterMode = TIM_COUNTERMODE_UP;
-	htim.Init.Prescaler = (HAL_RCC_GetPCLK1Freq() / 1000000) - 1;
-	htim.Init.Period = 50-1;*/
+	  TIM_ClockConfigTypeDef sClockSourceConfig;
+	  TIM_MasterConfigTypeDef sMasterConfig;
+
+	  htim4.Instance = TIM4;
+	  htim4.Init.Prescaler = 72;
+	  htim4.Init.CounterMode = TIM_COUNTERMODE_UP;
+	  htim4.Init.Period = 49;
+	  htim4.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+	  htim4.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+	  if (HAL_TIM_Base_Init(&htim4) != HAL_OK)
+	  {
+	    _Error_Handler(__FILE__, __LINE__);
+	  }
+
+	  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+	  if (HAL_TIM_ConfigClockSource(&htim4, &sClockSourceConfig) != HAL_OK)
+	  {
+	    _Error_Handler(__FILE__, __LINE__);
+	  }
+
+	  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+	  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+	  if (HAL_TIMEx_MasterConfigSynchronization(&htim4, &sMasterConfig) != HAL_OK)
+	  {
+	    _Error_Handler(__FILE__, __LINE__);
+	  }
 	timeout = usTim1Timerout50us;
-    //return HAL_OK == HAL_TIM_Base_Init(&htim) ? TRUE:FALSE;*/
 	return TRUE;
 }
 

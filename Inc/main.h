@@ -46,6 +46,12 @@
 
 /* Private define ------------------------------------------------------------*/
 
+#define CE_Pin GPIO_PIN_3
+#define CE_GPIO_Port GPIOA
+#define DC_Pin GPIO_PIN_4
+#define DC_GPIO_Port GPIOA
+#define RST_Pin GPIO_PIN_6
+#define RST_GPIO_Port GPIOA
 #define DataEnable_Pin GPIO_PIN_8
 #define DataEnable_GPIO_Port GPIOA
 

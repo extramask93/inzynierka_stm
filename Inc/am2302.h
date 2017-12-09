@@ -8,11 +8,16 @@
 #ifndef AM2302_H_
 #define AM2302_H_
 #include "stdint.h"
+
+typedef struct TH_Data {
+	int16_t itemperature;
+	uint16_t ihumidity;
+	float temperature;
+	float humidity;
+} TH_Data;
+
 void am2302_Init();
-int am2302_ReadData();
-int16_t am2302_getTemperature();
-uint16_t am2302_getHumidity();
-void am2302_pinOut();
-void am2302_inInput();
+int am2302_ReadData(TH_Data *result);
+
 
 #endif /* AM2302_H_ */

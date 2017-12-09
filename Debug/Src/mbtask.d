@@ -25,6 +25,9 @@ Src/mbtask.o: ../Src/mbtask.c \
  C:/STM32Toolchain/BH1750FVI/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h \
  C:/STM32Toolchain/BH1750FVI/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h \
  C:/STM32Toolchain/BH1750FVI/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h \
+ C:/STM32Toolchain/BH1750FVI/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rtc.h \
+ C:/STM32Toolchain/BH1750FVI/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rtc_ex.h \
+ C:/STM32Toolchain/BH1750FVI/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h \
  C:/STM32Toolchain/BH1750FVI/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
  C:/STM32Toolchain/BH1750FVI/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
  C:/STM32Toolchain/BH1750FVI/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
@@ -33,7 +36,12 @@ Src/mbtask.o: ../Src/mbtask.c \
  C:/STM32Toolchain/BH1750FVI/Drivers/freemodbus/modbus/include/mbport.h \
  C:/STM32Toolchain/BH1750FVI/Inc/mbtask.h \
  C:/STM32Toolchain/BH1750FVI/Inc/am2302.h \
- C:/STM32Toolchain/BH1750FVI/Inc/BV1750FVI.h
+ C:/STM32Toolchain/BH1750FVI/Inc/BV1750FVI.h \
+ C:/STM32Toolchain/BH1750FVI/Inc/usart.h \
+ C:/STM32Toolchain/BH1750FVI/Inc/tim.h \
+ C:/STM32Toolchain/BH1750FVI/Inc/rtc.h \
+ C:/STM32Toolchain/BH1750FVI/Inc/i2c.h \
+ C:/STM32Toolchain/BH1750FVI/Inc/adc.h
 
 C:/STM32Toolchain/BH1750FVI/Drivers/freemodbus/modbus/include/mb.h:
 
@@ -87,6 +95,12 @@ C:/STM32Toolchain/BH1750FVI/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h
 
 C:/STM32Toolchain/BH1750FVI/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h:
 
+C:/STM32Toolchain/BH1750FVI/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rtc.h:
+
+C:/STM32Toolchain/BH1750FVI/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rtc_ex.h:
+
+C:/STM32Toolchain/BH1750FVI/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h:
+
 C:/STM32Toolchain/BH1750FVI/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h:
 
 C:/STM32Toolchain/BH1750FVI/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h:
@@ -104,3 +118,13 @@ C:/STM32Toolchain/BH1750FVI/Inc/mbtask.h:
 C:/STM32Toolchain/BH1750FVI/Inc/am2302.h:
 
 C:/STM32Toolchain/BH1750FVI/Inc/BV1750FVI.h:
+
+C:/STM32Toolchain/BH1750FVI/Inc/usart.h:
+
+C:/STM32Toolchain/BH1750FVI/Inc/tim.h:
+
+C:/STM32Toolchain/BH1750FVI/Inc/rtc.h:
+
+C:/STM32Toolchain/BH1750FVI/Inc/i2c.h:
+
+C:/STM32Toolchain/BH1750FVI/Inc/adc.h:
